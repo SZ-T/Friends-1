@@ -1,0 +1,26 @@
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Upload a picture</p>
+            <a href="profile.php" class="delete" aria-label="close"></a>
+        </header>
+        <form method="POST" action="profile.php">
+            <section class="modal-card-body">
+                <div class="subtitle columns is-centered">Only PNG images are accepted</div>
+                <div class="columns is-centered file is-large is-boxed">
+                    <label class="file-label">
+                        <input name="file" accept="image/png" class="file-input" type="file" required>
+                        <span class="file-cta">
+                            Select file…
+                        </span>
+                    </label>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button name="image" class="button is-success">Changes image</button>
+                <a href="profile.php" class="button">Cancel</a>
+            </footer>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<th>Username</th>
+<th>Profile image</th>
+
+<?php
+
+function displayUserRow($row)
+{
+    echo "<tr>";
+    echo "<td>".$row->getUsername()."</td>";
+    echo "<td><figure class='image is-96x96'><img class='is-rounded' src='".$row->getImage()."'></figure></td>";
+    echo "</tr>";
+}

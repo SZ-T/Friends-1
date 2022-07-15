@@ -1,0 +1,90 @@
+<?php
+
+require_once ("templates/header.phtml");
+
+?>
+<div class="column is-full">
+    <div class="title has-text-centered">Login</div>
+
+    <?php
+    // Show success or error message if applicable
+    if (isset($view)) {
+        echo '<div class="columns is-centered"><div class="column is-narrow">';
+        echo '<div class="notification is-'.$view->errorColour.'">'.$view->errorMessage.'</div>';
+        echo '</div></div>';
+    }
+
+    ?>
+
+    <div class="columns is-centered">
+        <div class="column is-narrow">
+            <form class="box login" method="post" action="login.php">
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input name="email" class="input" type="email" placeholder="Email" <?php if(isset($view->errorType)&&$view->errorType=='login'){echo 'value="'.$view->email.'"';} ?> required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input name="password" class="input" type="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <input id="url" type="text" name="url">
+                <button name="login" class="button is-success">Login</button>
+            </form>
+        </div>
+        <div class="column is-narrow">
+            <form class="box login" method="post" action="login.php">
+                <div class="field">
+                    <label class="label">Enter you Email address</label>
+                    <div class="control">
+                        <input name="email" class="input" type="email" placeholder="Email" <?php if(isset($view->errorType)&&$view->errorType=='signUp'){echo 'value="'.$view->email.'"';} ?> required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Choose a username</label>
+                    <div class="control">
+                        <input name="username" class="input" type="text" placeholder="Username" <?php if(isset($view->errorType)&&$view->errorType=='signUp'){echo 'value="'.$view->username.'"';} ?> required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input name="first_name" class="input" type="text" placeholder="First Name" <?php if(isset($view->errorType)&&$view->errorType=='signUp'){echo 'value="'.$view->first_name.'"';} ?> required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input name="last_name" class="input" type="text" placeholder="Last Name" <?php if(isset($view->errorType)&&$view->errorType=='signUp'){echo 'value="'.$view->last_name.'"';} ?> required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Choose a password</label>
+                    <div class="control">
+                        <input name="password" class="input" type="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Repeat your password</label>
+                    <div class="control">
+                        <input name="password2" class="input" type="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <input id="url" type="text" name="url">
+                <button name="signUp" class="button is-success">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<?php
+
+require_once ("templates/footer.phtml");
+
+?>

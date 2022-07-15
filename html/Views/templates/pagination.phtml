@@ -1,0 +1,31 @@
+<!-- Pagination buttons -->
+
+<nav class="pagination is-rounded is-centered" role="navigation" aria-label="pagination">
+    <a class="pagination-previous" href="<?php if ($pagination->getCurrent() != 1){ echo $pagination->getUrl().$pagination->getPrevious(); } ?>">Previous</a>
+    <a class="pagination-next" href="<?php if ($pagination->getCurrent() != $pagination->getPages()){ echo $pagination->getUrl().$pagination->getNext(); } ?>">Next page</a>
+    <ul class="pagination-list">
+        <?php
+        if ($pagination->getCurrent() > 1) {
+            echo '<li><a class="pagination-link" aria-label="goto page 1" href="'.$pagination->getUrl().'1">1</a></li>';
+        }
+        if ($pagination->getCurrent() > 3) {
+            echo '<li><span class="pagination-ellipsis">&hellip;</span></li>';
+        }
+        if ($pagination->getCurrent() > 2) {
+            echo ' <li><a class="pagination-link" aria-label="Goto page '.$pagination->getPrevious().'" href="'.$pagination->getUrl().$pagination->getPrevious().'">'.$pagination->getPrevious().'</a></li>';
+        }
+        ?>
+        <li><a class="pagination-link is-current" aria-label="Page <?php echo $pagination->getCurrent(); ?>" aria-current="page"><?php echo $pagination->getCurrent(); ?></a></li>
+        <?php
+        if ($pagination->getCurrent() < $pagination->getPages() - 1) {
+            echo '<li><a class="pagination-link" aria-label="Goto page '.$pagination->getNext().'" href="'.$pagination->getUrl().$pagination->getNext().'">'.$pagination->getNext().'</a></li>';
+        }
+        if ($pagination->getCurrent() < $pagination->getPages() - 2) {
+            echo '<li><span class="pagination-ellipsis">&hellip;</span></li>';
+        }
+        if ($pagination->getCurrent() < $pagination->getPages()) {
+            echo '<li><a class="pagination-link" aria-label="Goto page '.$pagination->getPages().'"href="'.$pagination->getUrl().$pagination->getPages().'">'.$pagination->getPages().'</a></li>';
+        }
+        ?>
+    </ul>
+</nav>

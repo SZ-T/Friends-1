@@ -1,0 +1,74 @@
+<?php
+
+require_once ("templates/header.phtml");
+
+?>
+
+<div class="column is-narrow">
+    <div class="title has-text-centered">My Profile</div>
+
+    <?php
+    // Show success message if applicable
+    if (isset($view->message)) {
+        echo '<div class="columns is-centered"><div class="column is-narrow">';
+        echo '<div class="notification is-success">'.$view->message.'</div>';
+        echo '</div></div>';
+    }
+
+    // Show modal when applicable
+    if (isset($_GET["action"]) || isset($error->errorMessage)) {
+        if ($_GET["action"] == 'profile' || isset($_POST["profile"])) {
+            require_once("Views/templates/modal/changeProfile.phtml");
+        } elseif ($_GET["action"] == 'password' || isset($_POST["password"])) {
+            require_once("Views/templates/modal/changePassword.phtml");
+        } elseif ($_GET["action"] == 'image') {
+            require_once("Views/templates/modal/changeImage.phtml");
+        }
+    }
+
+    ?>
+    <div></div>
+    <div class="columns is-centered">
+        <figure class="image is-96x96">
+            <img src="<?php echo $view->user->getImage(); ?>" class="is-rounded">
+        </figure>
+    </div>
+    <a href="profile.php?action=image" class="button is-info is-medium is-fullwidth">Upload New Image</a>
+    <?php
+
+    if ($view->user->getImage() != 'images/profile/0.png') {
+        echo '<a href="profile.php?action=removeImage" class="button is-danger is-medium is-fullwidth">Remove Image</a>';
+    }
+
+    ?>
+    <table class="table is-striped is-hoverable subtitle">
+        <tbody>
+            <tr>
+                <td>Username:</td>
+                <td><?php echo $view->user->getUsername(); ?></td>
+            </tr>
+            <tr>
+                <td>First Name:</td>
+                <td><?php echo $view->user->getFirstName(); ?></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><?php echo $view->user->getLastName(); ?></td>
+            </tr>
+            <tr>
+                <td>Email Address:</td>
+                <td><?php echo $view->user->getEmail(); ?></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="profile.php?action=profile" class="button is-info is-fullwidth is-medium">Edit Details</a>
+    <br />
+    <a href="profile.php?action=password" class="button is-warning is-fullwidth is-medium">Change Password</a>
+
+</div>
+<?php
+
+require_once ("templates/footer.phtml");
+
+?>
+

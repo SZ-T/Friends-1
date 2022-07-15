@@ -1,0 +1,48 @@
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Edit Details</p>
+            <a href="profile.php" class="delete" aria-label="close"></a>
+        </header>
+        <form method="POST" action="profile.php">
+            <section class="modal-card-body">
+                <?php
+                if (isset($error->errorMessage)) {
+                    echo '<div class="columns is-centered"><div class="column is-narrow">';
+                    echo '<div class="notification is-danger">'.$error->errorMessage.'</div>';
+                    echo '</div></div>';
+                }
+                ?>
+                <div class="field">
+                    <label class="label">Email address</label>
+                    <div class="control">
+                        <input name="email" class="input" type="email" placeholder="Email" value="<?php if(isset($error)){echo $error->email;}else{echo $view->user->getEmail();} ?>" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">
+                        <input name="username" class="input" type="text" placeholder="Username" value="<?php if(isset($error)){echo $error->username;}else{echo $view->user->getUsername();} ?>" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input name="first_name" class="input" type="text" placeholder="First Name" value="<?php if(isset($error)){echo $error->firstName;}else{echo $view->user->getFirstName();} ?>" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input name="last_name" class="input" type="text" placeholder="Last Name" value="<?php if(isset($error)){echo $error->lastName;}else{echo $view->user->getLastName();} ?>" required>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button name="profile" class="button is-success">Save changes</button>
+                <a href="profile.php" class="button">Cancel</a>
+            </footer>
+        </form>
+    </div>
+</div>

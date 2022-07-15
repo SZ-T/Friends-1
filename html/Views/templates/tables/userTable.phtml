@@ -1,0 +1,35 @@
+<th>Username</th>
+<th>Name</th>
+<th>Profile image</th>
+<th></th>
+
+<?php
+
+function displayUserRow($row)
+{
+    echo "<tr>";
+    echo "<td>".$row->getUsername()."</td>";
+    echo "<td>".$row->getFirstName()." ".$row->getLastName()."</td>";
+    echo "<td><figure class='image is-96x96'><img class='is-rounded' src='".$row->getImage()."'></figure></td>";
+    echo "<td>";
+    if ($row->getStatus()) {
+        if ($row->getStatus() == 'Accepted') {
+            echo '<a class="button is-danger is-fullwidth" href="requests.php?id='.$row->getID().'&action=reject">Unfriend</a>';
+        }
+        if ($row->getStatus() == 'Pending') {
+            if (!$row->getSender()){
+                echo '<div class="has-text-centered">Friendship request Sent</div>';
+                echo '<a class="button is-danger is-fullwidth" href="requests.php?id='.$row->getID().'&action=reject">Withdraw</a>';
+            } else {
+                echo '<div class="has-text-centered">Friendship request received</div>';
+                echo '<a class="button is-success is-fullwidth" href="requests.php?id='.$row->getID().'&action=accept">Accept</a>';
+                echo '<a class="button is-danger is-fullwidth" href="requests.php?id='.$row->getID().'&action=reject">Reject</a>';
+            }
+        }
+    } else {
+
+        echo '<a class="button is-info is-fullwidth" href="requests.php?id='.$row->getID().'&action=request">Send Friend Request</a>';
+    }
+    echo "</td>";
+    echo "</tr>";
+}

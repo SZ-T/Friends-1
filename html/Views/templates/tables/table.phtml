@@ -1,0 +1,95 @@
+<form action="">
+    <div class="columns is-centered">
+        <div class="column is-narrow">
+            <div class="field has-addons">
+                <div class="control">
+                    <input name="search" class="input field" type="text" placeholder="Search..." value="<?php echo $view->searchStatement; ?>">
+                    <input id="url" type="text" name="url">
+                </div>
+                <div class="control">
+                    <button name="submit" type="submit" class="button is-info">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+        <?php if (isset($_SESSION["id"])): ?>
+            <div class="column is-narrow">
+                <div class="dropdown is-hoverable">
+                    <div class="dropdown-trigger">
+                        <div class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                            <span>Advanced</span>
+                            <span class="icon is-small">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                 </span>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                        <div class="dropdown-content">
+                            <div class="dropdown-item">
+                                <div class="field is-narrow">
+                                    <label class="label">Sort by</label>
+                                </div>
+                                <div class="select">
+                                    <select name="sort">
+                                        <?php
+                                        foreach (['Username [A-Z]','Username [Z-A]','First name [A-Z]','First name [Z-A]','Surname [A-Z]','Surname [Z-A]'] as $value) {
+                                            (new SearchParams())->option('sort', $value);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="field is-narrow">
+                                    <label class="label">Items per page</label>
+                                </div>
+                                <div class="select">
+                                    <select name="height">
+                                        <?php
+                                        foreach (['10','20','50','100','200','All'] as $value) {
+                                            (new SearchParams())->option('height', $value);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="control">
+                                    <button name="submit" type="submit" class="button is-info">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif ?>
+    </div>
+</form>
+
+
+<table class="table is-striped is-hoverable is-fullwidth">
+    <thead>
+    <tr>
+        <?php
+        if (isset($_SESSION["id"])) {
+            require_once("Views/templates/tables/userTable.phtml");
+        } else {
+            require_once("Views/templates/tables/guestUserTable.phtml");
+        }
+        ?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+
+    foreach ( $view->userData as $row ) {
+
+        displayUserRow($row);
+    }
+
+    ?>
+    </tbody>
+</table>
+
+<?php require_once ("Views/templates/pagination.phtml"); ?>
